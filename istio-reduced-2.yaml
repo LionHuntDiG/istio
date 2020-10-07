@@ -16943,12 +16943,12 @@ metadata:
     heritage: Tiller
     release: istio
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
   - name: http-kiali
     protocol: TCP
     port: 20001
-    nodePort: 31000
+    
   selector:
     app: kiali
 
@@ -18739,10 +18739,10 @@ items:
         port: 16686
         protocol: TCP
         targetPort: 16686
-        nodePort: 31001
+     
     selector:
       app: jaeger
-    type: NodePort
+    type: LoadBalancer
 - apiVersion: v1
   kind: Service
   metadata:
