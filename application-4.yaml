@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpd
+  labels:
+    app: mhc-back
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mhc-back
+  template:
+    metadata:
+      labels:
+        app: mhc-back
+    spec:
+      containers:
+      - name: httpd
+        image: httpd
+        ports:
+        - containerPort: 80
+          name: redis
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mhc-back
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 80  
+  selector:
+    app: mhc-back
